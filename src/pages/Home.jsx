@@ -14,7 +14,7 @@ export default function Home({ name, setName }) {
       <form
         action=""
         onSubmit={(e) => e.preventDefault()}
-        className="flex max-w-xs lg:max-w-md mx-auto gap-2 flex-col lg:flex-row justify-center"
+        className="flex max-w-xs lg:max-w-md mx-auto gap-3 flex-col lg:flex-row justify-center"
       >
         <input
           type="text"

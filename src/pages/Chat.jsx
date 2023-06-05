@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import Form from "../components/Form";
 import Message from "../components/Message";
+import { CgClose } from "react-icons/cg";
 
 export default function Chat({ name }) {
   const [messages, setMessages] = useState([
@@ -44,12 +45,19 @@ export default function Chat({ name }) {
         behavior: "smooth",
       });
     }, 0);
-  }
+  };
 
+  const clearChats = () => {
+    if (messages.length > 0) {
+      if (confirm("Do you want to clear your messages?")) {
+        setMessages([]);
+      }
+    }
+  };
 
   return (
     <div>
-      <div className="bg-gray-900 text-gray-200 py-5 flex gap-10 justify-center shadow-md">
+      <div className="relative bg-gray-900 text-gray-200 py-5 flex gap-5 justify-center items-center shadow-md">
         <button
           className={` p-2 px-8 font-semibold rounded ${
             person === "You" ? "bg-blue-400" : "bg-gray-700"
@@ -72,9 +80,15 @@ export default function Chat({ name }) {
         >
           {name}
         </button>
+        <div
+          className="text-gray-300 absolute right-6 lg:right-20 top-7 cursor-pointer text-[24px]"
+          onClick={clearChats}
+        >
+          <CgClose />
+        </div>
       </div>
       <div
-        className="h-[80vh] pb-16 overflow-y-scroll bg-gray-800"
+        className="h-[90vh] pb-16 overflow-y-scroll bg-gray-800"
         ref={chatcenter}
       >
         <div className="m-auto max-w-xs pt-5">
@@ -88,10 +102,20 @@ export default function Chat({ name }) {
               />
             );
           })}
+          {messages.length <= 0 && (
+            <div className="text-center text-gray-300">
+              No messages yet. Start chatting.
+            </div>
+          )}
         </div>
       </div>
       <div className="bg-gray-700 fixed bottom-0 p-4 w-full flex justify-center items-center">
-        <Form messages={messages} setMessages={setMessages} person={person} chatcenter={chatcenter} />
+        <Form
+          messages={messages}
+          setMessages={setMessages}
+          person={person}
+          chatcenter={chatcenter}
+        />
       </div>
     </div>
   );
