@@ -14,7 +14,7 @@ export default function Home({ name, setName }) {
       <form
         action=""
         onSubmit={(e) => e.preventDefault()}
-        className="flex max-w-xs mx-auto gap-2 flex-col lg:flex-row justify-center"
+        className="flex max-w-xs lg:max-w-md mx-auto gap-2 flex-col lg:flex-row justify-center"
       >
         <input
           type="text"
@@ -25,7 +25,7 @@ export default function Home({ name, setName }) {
           className="p-4 px-5 rounded-lg text-gray-800 "
         />
 
-        <button className="bg-blue-500 p-4 rounded-md">
+        <button className="bg-blue-500 p-4 rounded-md" type="submit">
           <Link to="chat">Proceed to Chat</Link>
         </button>
       </form>
