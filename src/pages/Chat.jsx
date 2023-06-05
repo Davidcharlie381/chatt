@@ -48,7 +48,7 @@ export default function Chat({ name }) {
   };
 
   const clearChats = () => {
-    if (messages.length > 0) {
+    if (messages.length > 0) { 
       if (confirm("Do you want to clear your messages?")) {
         setMessages([]);
       }
