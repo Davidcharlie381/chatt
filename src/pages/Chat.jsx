@@ -16,7 +16,16 @@ export default function Chat({ name }) {
     },
     {
       sender: name,
-      text: "I love you too.",
+      text: "Awwwn. I love me too.",
+      time: new Date().toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }),
+    },
+    {
+      sender: "You",
+      text: "I said it. You look like the girl that broke my heart when I was 7.",
       time: new Date().toLocaleString("en-US", {
         hour: "numeric",
         minute: "numeric",
@@ -24,10 +33,19 @@ export default function Chat({ name }) {
       }),
     },
   ]);
-
   const [person, setPerson] = useState("You");
 
-  const chatcenter = useRef();
+  const chatcenter = useRef(null);
+
+  const scrollBottom = () => {
+    setTimeout(() => {
+      chatcenter.current.scrollTo({
+        top: chatcenter.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 0);
+  }
+
 
   return (
     <div>
@@ -36,7 +54,10 @@ export default function Chat({ name }) {
           className={` p-2 px-8 font-semibold rounded ${
             person === "You" ? "bg-blue-400" : "bg-gray-700"
           }`}
-          onClick={() => setPerson("You")}
+          onClick={() => {
+            setPerson("You");
+            scrollBottom();
+          }}
         >
           You
         </button>
@@ -44,7 +65,10 @@ export default function Chat({ name }) {
           className={` p-2 px-8 font-semibold rounded ${
             person === name ? "bg-blue-400" : "bg-gray-700"
           }`}
-          onClick={() => setPerson(name)}
+          onClick={() => {
+            setPerson(name);
+            scrollBottom();
+          }}
         >
           {name}
         </button>
@@ -67,7 +91,7 @@ export default function Chat({ name }) {
         </div>
       </div>
       <div className="bg-gray-700 fixed bottom-0 p-4 w-full flex justify-center items-center">
-        <Form messages={messages} setMessages={setMessages} person={person} />
+        <Form messages={messages} setMessages={setMessages} person={person} chatcenter={chatcenter} />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { TbSend } from "react-icons/tb";
 
-export default function Form({ messages, setMessages, person }) {
+export default function Form({ messages, setMessages, person, chatcenter }) {
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -27,6 +27,12 @@ export default function Form({ messages, setMessages, person }) {
     }
 
     setMessage("");
+    setTimeout(() => {
+      chatcenter.current.scrollTo({
+        top: chatcenter.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 0);
   };
 
   return (
